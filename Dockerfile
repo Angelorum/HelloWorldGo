@@ -1,9 +1,8 @@
-FROM golang:1.10.4
+FROM golang:1.11.0-alpine3.8
 
+EXPOSE 8080
 WORKDIR /go/src/app
 COPY ./src .
+RUN go get -d -v ./... && go install -v ./...
 
-RUN go get -d -v ./...
-RUN go install -v ./...
-
-CMD ["app"]
+ENTRYPOINT ["app"]
